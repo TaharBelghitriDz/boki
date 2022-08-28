@@ -15,6 +15,7 @@ const HomeComponent = () => {
     <VStack spacing="150px">
       <MainPage />
       <SecondPage />
+      <TherdPage />
     </VStack>
   );
 };
@@ -123,6 +124,116 @@ const SecondPage = () => (
         <CollectionsLayout />
         <CollectionsLayout />
         <CollectionsLayout />
+      </VStack>
+    </HStack>
+  </VStack>
+);
+
+const TherdPage = () => (
+  <VStack spacing="45px" w="full" alignItems="start">
+    <Text
+      color="red.500"
+      w="400px"
+      fontSize="100px"
+      lineHeight="80px"
+      fontWeight="bold"
+    >
+      top rated books
+    </Text>
+    <Text w="800px" color="gray" fontWeight="bold">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate
+      libero et velit interdum, ac aliquet odio mattis. Class aptent taciti
+      sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+      Curabitur tempus urna at turpis condimentum lobortis.
+    </Text>
+    <HStack spacing="100px" h="full">
+      <Box pos="relative" w="500px" h="650px">
+        <Image
+          pos="absolute"
+          w="full"
+          h="full"
+          src="/topratedbook1.png"
+          zIndex={-600}
+        />
+        <Text
+          p="50px"
+          fontSize="50px"
+          color="white"
+          fontWeight="bold"
+          lineHeight="50px"
+        >
+          some book name
+        </Text>
+        <Text color="gray" p="50px" pt="0" fontWeight="bold">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+          vulputate libero et velit interdum, ac aliquet odio mattis. Class
+          aptent taciti sociosqu ad litora torquent per conubia nostra, per
+          inceptos himenaeos.
+        </Text>
+      </Box>
+      <VStack justifyContent="space-between" h="633px" top="0">
+        <VStack
+          pos="relative"
+          w="750px"
+          h="300px"
+          justifyContent="space-evenly"
+          alignItems="flex-start"
+        >
+          <Text
+            fontSize="50px"
+            color="white"
+            fontWeight="bold"
+            lineHeight="50px"
+            pl="30px"
+          >
+            some book name
+          </Text>
+          <Text color="gray" pl="30px" fontWeight="bold" w="450px">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+            vulputate libero et velit interdum, ac aliquet odio mattis. Class
+            aptent taciti sociosqu ad litora torquent per conubia nostra, per
+            inceptos himenaeos.
+          </Text>
+          <Image
+            pos="absolute"
+            top={0}
+            w="full"
+            h="full"
+            src="/topratedbook2.png"
+            zIndex={-600}
+          />
+        </VStack>
+        <VStack
+          pos="relative"
+          w="750px"
+          h="300px"
+          justifyContent="space-evenly"
+          alignItems="flex-start"
+        >
+          <Text
+            fontSize="50px"
+            color="white"
+            fontWeight="bold"
+            lineHeight="50px"
+            pl="30px"
+          >
+            some book name
+          </Text>
+          <Text color="gray" pl="30px" fontWeight="bold" w="450px">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+            vulputate libero et velit interdum, ac aliquet odio mattis. Class
+            aptent taciti sociosqu ad litora torquent per conubia nostra, per
+            inceptos himenaeos.
+          </Text>
+          <Image
+            pos="absolute"
+            top={0}
+            w="full"
+            h="full"
+            src="/topratedbook2.png"
+            zIndex={-600}
+          />
+        </VStack>
       </VStack>
     </HStack>
   </VStack>
