@@ -14,21 +14,22 @@ export const CollectionsLayout = () => {
 
   return (
     <HStack
+      overflow="vi"
       as={motion.div}
       onHoverStart={() => onToggle()}
       onHoverEnd={() => onToggle()}
-      w="360px"
-      h="170px"
+      w="full"
+      h="220px"
       justifyContent="space-between"
-      spacing="50px"
       pos="relative"
+      pt="50px"
     >
       <VStack
         alignItems="start"
-        w="200px"
+        w={{ start: "70%", xl: "300px" }}
         h="full"
         fontWeight="bold"
-        justifyContent="space-between"
+        justifyContent={{ startsWith: "none", xl: "space-between" }}
       >
         <Text fontSize="l" fontWeight="bold">
           Romance
@@ -38,8 +39,8 @@ export const CollectionsLayout = () => {
           vulputate libero et velit interdum, ac aliquet odio mattis.
         </Text>
       </VStack>
-      <Box h="full" w="150px" bg="green" rounded="5px" />
-      <Box pos="absolute" right="-25px">
+      <Image src="/bookcover.jpg" h="full" w="auto" bg="green" rounded="5px" />
+      <Box pos="absolute" right="-0">
         <ScaleFade in={isOpen}>
           <Image src="/arrow.png" cursor="pointer" />
         </ScaleFade>

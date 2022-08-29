@@ -29,4 +29,12 @@ export default extendTheme({
     l: "23px",
     xl: "30px",
   },
+  breakpoints: {
+    start: "0px",
+    sm: "320px",
+    md: "768px",
+    lg: "960px",
+    xl: "1300px",
+    "2xl": "1536px",
+  },
 });
