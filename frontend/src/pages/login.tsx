@@ -5,14 +5,6 @@ import { ReactElement, useEffect } from "react";
 import { NextPageWithLayout } from "./_app";
 
 const Login: NextPageWithLayout = () => {
-  // const loadHello = async () => {};
-  // await fetch("http://localhost:8080/api/auth")
-  //   .then((res) => res.json())
-  //   .then((res) => {
-  //     console.log("heree");
-  //     console.log(res);
-  //   });
-
   console.log("hi");
 
   return (
