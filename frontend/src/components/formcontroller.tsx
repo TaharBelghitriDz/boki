@@ -40,6 +40,7 @@ export const FormController = ({
           color="gray"
           placeholder={label}
           _focus={{ color: "white" }}
+          rounded="10px"
         />
         {label === "password" && (
           <InputRightElement width="4.5rem">

@@ -120,11 +120,10 @@ const LoginComponent = (props: StackProps) => {
       <Button
         colorScheme="blue"
         w="full"
-        onClick={() => {
-          console.log("clicked");
-
-          router.push("http://localhost:8080/auth/google");
-        }}
+        rounded="10px"
+        fontSize="m"
+        onClick={() => router.push("http://localhost:8080/auth/google")}
+        zIndex={0}
       >
         <Image src="/Googleicon.svg" h="25px" w="auto" />
         {place ? "login with google" : "signup with google"}
@@ -147,7 +146,13 @@ const LoginComponent = (props: StackProps) => {
           ]}
         />
       )}
-      <Button colorScheme="green" w="full" onClick={() => loginFun()}>
+      <Button
+        colorScheme="green"
+        w="full"
+        onClick={() => loginFun()}
+        rounded="10px"
+        fontSize="m"
+      >
         {place ? "login now " : "signup now"}
       </Button>
       <Text color="white" onClick={() => setPlace(!place)} cursor="pointer">

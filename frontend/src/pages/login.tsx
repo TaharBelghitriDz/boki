@@ -8,26 +8,36 @@ const Login: NextPageWithLayout = () => {
   console.log("hi");
 
   return (
-    <HStack w="auto" h="inherit" minH="90vh" mb="30px">
-      <LoginComponent
-        w={{ start: "full", md: "50%" }}
-        p="50px"
-        bg="black"
-        alignItems="start"
-        spacing="30px"
-        rounded="10px"
-        maxW="500px"
-      />
-      <Stack
-        justifyContent="center"
+    <Stack justifyContent="center" alignItems="center">
+      <HStack
+        w="auto"
+        h="inherit"
+        minH="90vh"
+        mb="30px"
         alignItems="center"
-        w={{ start: "full", md: "50%" }}
-        h="full"
-        display={{ start: "none", md: "block" }}
+        spacing={{ start: "0px", md: "10%" }}
       >
-        <Image src="/readersnow.gif" />
-      </Stack>
-    </HStack>
+        <LoginComponent
+          w={{ start: "full", md: "50%" }}
+          p="50px"
+          bg="black"
+          alignItems="start"
+          spacing="30px"
+          rounded="20px"
+          maxW="500px"
+        />
+        <Stack
+          justifyContent="center"
+          alignItems="center"
+          w={{ start: "full", md: "50%" }}
+          h="full"
+          maxW="500px"
+          display={{ start: "none", md: "block" }}
+        >
+          <Image src="/readersnow.gif" />
+        </Stack>
+      </HStack>
+    </Stack>
   );
 };
 
