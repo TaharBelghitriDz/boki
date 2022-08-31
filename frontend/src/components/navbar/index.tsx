@@ -4,10 +4,13 @@ import {
   HStack,
   Image,
   Input,
+  InputGroup,
+  InputLeftElement,
   Stack,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { SearchIcon } from "../icons";
 
 const Navbar = (props?: ChakraProps) => {
   const router = useRouter();
@@ -47,12 +50,34 @@ const Navbar = (props?: ChakraProps) => {
       >
         <Image src="/logo.png" h="50px" />
         <HStack spacing="25px" fontSize="18px">
-          <Input w="150px" colorScheme="blue" />
+          <InputGroup w="auto">
+            <InputLeftElement
+              pointerEvents="none"
+              children={
+                <HStack cursor="pointer">
+                  <SearchIcon size={25} />
+                </HStack>
+              }
+            />
+            <Input
+              w="150px"
+              colorScheme="blue"
+              border="none"
+              bg="black"
+              rounded="10px"
+              focusBorderColor="transparent"
+              placeholder="search"
+              color="white"
+            />
+          </InputGroup>
+
           <Box cursor="pointer" onClick={() => router.push("/login")}>
             home
           </Box>
           <Box cursor="pointer">collections</Box>
-          <Box cursor="pointer">login & signup</Box>
+          <Box cursor="pointer" width="120px">
+            login & signup
+          </Box>
         </HStack>
       </HStack>
     </Stack>
