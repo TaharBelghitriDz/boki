@@ -10,8 +10,12 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^2.2.9",
+    "@davidegheri/gm-palette": "^4.0.1",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
+    "@types/extract-colors": "^1.1.0",
+    "@types/get-image-colors": "^4.0.1",
+    "extract-colors": "^1.1.22",
     "framer-motion": "^7.2.1",
     "next": "12.2.5",
     "react": "18.2.0",

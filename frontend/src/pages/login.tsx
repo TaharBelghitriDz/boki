@@ -5,8 +5,6 @@ import { ReactElement, useEffect } from "react";
 import { NextPageWithLayout } from "./_app";
 
 const Login: NextPageWithLayout = () => {
-  console.log("hi");
-
   return (
     <Stack justifyContent="center" alignItems="center">
       <HStack
