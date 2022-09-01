@@ -71,11 +71,15 @@ const Navbar = (props?: ChakraProps) => {
             />
           </InputGroup>
 
-          <Box cursor="pointer" onClick={() => router.push("/login")}>
+          <Box cursor="pointer" onClick={() => router.push("/")}>
             home
           </Box>
           <Box cursor="pointer">collections</Box>
-          <Box cursor="pointer" width="120px">
+          <Box
+            cursor="pointer"
+            width="120px"
+            onClick={() => router.push("/login")}
+          >
             login & signup
           </Box>
         </HStack>
