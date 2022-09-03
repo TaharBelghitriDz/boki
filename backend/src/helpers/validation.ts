@@ -12,11 +12,9 @@ const signup = yup.object().shape({
   confirmPassowrd: yup.string().required(),
 });
 
-export const createpostValidation = yup.object().shape({
-  title: yup.string().required(),
-  content: yup.string().required(),
-  srcUrl: yup.string(),
-  tags: yup.string().required(),
+const action = yup.object().shape({
+  action: yup.string().required(),
+  collectionName: yup.string(),
 });
 
 export const tokenSign = (str: string) => jwt.sign({ str: str }, "secret");
@@ -27,4 +25,5 @@ export const tokenVrfy = (token: string, clb?: (err: any, rslt: any) => void) =>
 export default {
   login,
   signup,
+  action,
 };
