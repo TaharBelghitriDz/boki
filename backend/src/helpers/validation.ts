@@ -9,7 +9,6 @@ const login = yup.object().shape({
 const signup = yup.object().shape({
   email: yup.string().required(),
   password: yup.string().required(),
-  name: yup.string().required(),
   confirmPassowrd: yup.string().required(),
 });
 

@@ -6,10 +6,7 @@ import { hash } from "bcryptjs";
 const userSchema = new Schema<userSchema>({
   email: String,
   password: String,
-  collections: [
-    { collectionName: String, bookUrl: [{ title: String, url: String }] },
-  ],
-  liked: [{ articleUrl: String }],
+  collections: [{ name: String, books: [{ title: String, img: String }] }],
 });
 
 userSchema.pre<userSchema>("validate", function (this: userSchema, next) {
