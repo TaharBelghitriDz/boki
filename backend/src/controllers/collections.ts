@@ -61,8 +61,6 @@ export const collectinActions: Handler = (req, res) => {
       $and: [{ _id: userInfos._id }, { ...searchQuery() }],
     })
     .then((user: any) => {
-      console.log(searchQuery());
-
       if (!user)
         return res.status(400).json({ err: "something wrong happend #3" });
 
@@ -85,8 +83,6 @@ export const collectinActions: Handler = (req, res) => {
           if (e.name === collectionName)
             return (e.books = e.books.filter((i: any) => i.title != bookName));
         });
-
-      console.log(user.collections);
 
       user
         .save()
