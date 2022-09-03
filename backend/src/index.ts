@@ -29,32 +29,4 @@ app.use(authRout);
 app.use("/collection", collection);
 passport.use(googleStrategy);
 
-const array = [
-  { e: "hi", i: 1 },
-  { e: "hi", i: 2 },
-  { e: "hi", i: 4 },
-];
-
-console.log(array);
-
-const arr = array.filter((e) => e.i != 2);
-console.log(arr);
-
-user.findOne(
-  {},
-
-  (err: any, token: any) => {
-    console.log(token.collections[0]);
-    //const rr = token.collections.filter((e: any) => e.name != "c01");
-    // console.log(rr);
-
-    //console.log(token.collections[0].books);
-    // token.collections[0].books = [{ title: "b02", img: "02" }];
-    // token
-    //   .save()
-    //   .then(() => console.log({ result: "created" }))
-    //   .catch(() => console.log({ err: "somethiong wrong happend #1" }));
-  }
-);
-
 export default app;
