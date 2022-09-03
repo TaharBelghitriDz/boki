@@ -6,6 +6,6 @@ const router = Router();
 
 router.use(validateToken);
 router.post("/create", createCollection);
-router.post("/add", collectinActions);
+router.post("/action", collectinActions);
 
 export default router;
