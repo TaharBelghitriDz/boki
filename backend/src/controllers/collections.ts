@@ -114,8 +114,6 @@ export const collectionGet: Handler = (req, res) => {
       if (!user)
         return res.status(400).json({ err: "something wrong happend #1" });
 
-      console.log(user.collections);
-
       res.status(200).json({
         result: query["collections.name"]
           ? user.collections.filter((e) => e.name == collectionName)
