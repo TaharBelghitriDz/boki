@@ -32,6 +32,7 @@ export const collectinActions: Handler = (req, res) => {
   // need to validate the opiration
   // (code check if there is a value and don't check if the value is on the db or no for example )
   // it's working fine for simple idea like mine (no one gonna try to hack it ... it's open source already)
+  //
 
   const { collectionName, bookName, img, action } = req.body;
 
@@ -97,10 +98,32 @@ export const collectinActions: Handler = (req, res) => {
           )
         );
     })
-    .catch(
-      (err) => (
-        console.log(err),
-        res.status(400).json({ err: "something wrong happend #2" })
-      )
+    .catch((err) =>
+      res.status(400).json({ err: "something wrong happend #2" })
     );
+};
+
+export const collectionGet: Handler = (req, res) => {
+  const { collectionName } = req.body;
+
+  const query = collectionName ? { "collections.name": collectionName } : {};
+
+  user
+    .findOne(query)
+    .then((user) => {
+      if (!user)
+        return res.status(400).json({ err: "something wrong happend #1" });
+
+      console.log(user.collections);
+
+      res.status(200).json({
+        result: query["collections.name"]
+          ? user.collections.filter((e) => e.name == collectionName)
+          : user.collections.map((e: any) => ({
+              name: e.name,
+              img: e.books[0] ? e.books[0].img : undefined,
+            })),
+      });
+    })
+    .catch(() => res.status(400).json({ err: "something wrong happend #2" }));
 };
