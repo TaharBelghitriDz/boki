@@ -1,12 +1,13 @@
 import {
   Box,
   ChakraProps,
+  CloseButton,
+  Collapse,
   HStack,
-  Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
   Stack,
+  Text,
+  useDisclosure,
+  VStack,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -15,10 +16,11 @@ import { SearchIcon } from "../icons";
 const Navbar = (props?: ChakraProps) => {
   const router = useRouter();
   const [onTop, setOnTop] = useState(false);
+  const { isOpen, onToggle } = useDisclosure();
 
   const handleScroll = () => {
     const position = window.pageYOffset;
-    if (position > 100) setOnTop(true);
+    if (position > 50) setOnTop(true);
     else setOnTop(false);
   };
 
@@ -29,63 +31,196 @@ const Navbar = (props?: ChakraProps) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (isOpen) setOnTop(true);
+  }, [isOpen, onTop]);
+
   return (
-    <Stack w="inherit" justifyContent="center" alignItems="center" h="75px">
-      <HStack
+    <Stack
+      w="inherit"
+      justifyContent="center"
+      alignItems="center"
+      bg="green"
+      mt="75px"
+    >
+      <VStack
         {...props}
-        top="25px"
-        h="75px"
+        top={{ start: "0", xl: "25px" }}
         pos="fixed"
-        w="inherit"
-        maxW="1100px"
-        justifyContent="space-between"
-        alignItems="flex-end"
+        w="full"
+        left={{ start: "0", xl: "auto" }}
+        maxW={{ start: "auto", xl: "1020px" }}
+        alignItems="center"
         bg={onTop ? "rgb(250,250,250,60%)" : ""}
         p="20px"
         px="50px"
-        rounded="20px"
+        rounded={{ start: "0", xl: "10px" }}
         zIndex={100}
         boxShadow={onTop ? "lg" : ""}
         backdropFilter={onTop ? "blur(20px)" : ""}
+        spacing="0px"
       >
-        <Image src="/logo.png" h="50px" />
-        <HStack spacing="25px" fontSize="18px">
-          <InputGroup w="auto">
-            <InputLeftElement
-              pointerEvents="none"
-              children={
-                <HStack cursor="pointer">
-                  <SearchIcon size={25} />
-                </HStack>
-              }
+        <HStack w="full" justifyContent="space-between">
+          <Box fontSize="40px" fontWeight="light">
+            boki
+          </Box>
+          {isOpen ? (
+            <CloseButton
+              display={{ start: "block", md: "none" }}
+              size="md"
+              _hover={{ bg: "transparent" }}
+              onClick={onToggle}
             />
-            <Input
-              w="150px"
-              colorScheme="blue"
-              border="none"
-              bg="black"
-              rounded="10px"
-              focusBorderColor="transparent"
-              placeholder="search"
-              color="white"
+          ) : (
+            <Box
+              display={{ start: "block", md: "none" }}
+              bgImage="url('/menu-icon.svg')"
+              bgRepeat="no-repeat"
+              w="30px"
+              h="30px"
+              cursor="pointer"
+              onClick={onToggle}
             />
-          </InputGroup>
+          )}
 
-          <Box cursor="pointer" onClick={() => router.push("/")}>
-            home
-          </Box>
-          <Box cursor="pointer">collections</Box>
-          <Box
-            cursor="pointer"
-            width="120px"
-            onClick={() => router.push("/login")}
+          <HStack
+            spacing="25px"
+            fontSize="18px"
+            display={{ start: "none", md: "flex" }}
+            h="50px"
           >
-            login & signup
-          </Box>
+            <Box cursor="pointer" onClick={() => router.push("/")}>
+              home
+            </Box>
+
+            <HStack
+              bg="black"
+              spacing="10px"
+              rounded="10px"
+              p="10px"
+              cursor="pointer"
+            >
+              <SearchIcon size={25} />
+              <Text color="white">search</Text>
+            </HStack>
+
+            <Box cursor="pointer">collections</Box>
+            <Box
+              cursor="pointer"
+              width="120px"
+              onClick={() => router.push("/login")}
+            >
+              login & signup
+            </Box>
+          </HStack>
         </HStack>
-      </HStack>
+        <VStack h="auto" w="full" display={{ start: "block", md: "none" }}>
+          <Collapse in={isOpen} animateOpacity>
+            <VStack
+              p="20px"
+              color="black"
+              mt="4"
+              rounded="md"
+              shadow="md"
+              w="full"
+              spacing="20px"
+            >
+              <Box cursor="pointer" onClick={() => router.push("/")}>
+                home
+              </Box>
+
+              <HStack
+                bg="black"
+                spacing="10px"
+                rounded="10px"
+                p="10px"
+                px="30px"
+                cursor="pointer"
+              >
+                <SearchIcon size={25} />
+                <Text color="white">search</Text>
+              </HStack>
+
+              <Box cursor="pointer">collections</Box>
+              <Box
+                cursor="pointer"
+                width="120px"
+                onClick={() => router.push("/login")}
+              >
+                login & signup
+              </Box>
+            </VStack>
+          </Collapse>
+        </VStack>
+      </VStack>
     </Stack>
   );
 };
 
+/*
+    <Stack w="inherit" justifyContent="center" alignItems="center" h="75px">
+
+
+{...props}
+        top={{ start: "0", xl: "25px" }}
+        h="auto"
+        pos="fixed"
+        w="full"
+        left={{ start: "0", xl: "auto" }}
+        maxW={{ start: "auto", xl: "1020px" }}
+        alignItems="center"
+        bg={onTop ? "rgb(250,250,250,60%)" : ""}
+        p="20px"
+        px="50px"
+        rounded={{ start: "0", xl: "10px" }}
+        zIndex={100}
+        boxShadow={onTop ? "lg" : ""}
+        backdropFilter={onTop ? "blur(20px)" : ""}
+
+<Box fontSize="40px" fontWeight="light" bg="green">
+            boki
+          </Box>
+
+          <Box
+            display={{ start: "block", md: "none" }}
+            bgImage="url('/menu-icon.svg')"
+            bgRepeat="no-repeat"
+            w="30px"
+            h="30px"
+            cursor="pointer"
+            onClick={onToggle}
+            bg="green"
+          />
+
+          <HStack
+            spacing="25px"
+            fontSize="18px"
+            display={{ start: "none", md: "flex" }}
+            h="50px"
+          >
+            <Box cursor="pointer" onClick={() => router.push("/")}>
+              home
+            </Box>
+
+            <HStack
+              bg="black"
+              spacing="10px"
+              rounded="10px"
+              p="10px"
+              cursor="pointer"
+            >
+              <SearchIcon size={25} />
+              <Text color="white">search</Text>
+            </HStack>
+
+            <Box cursor="pointer">collections</Box>
+            <Box
+              cursor="pointer"
+              width="120px"
+              onClick={() => router.push("/login")}
+            >
+              login & signup
+            </Box>
+          </HStack>
+*/
 export default Navbar;

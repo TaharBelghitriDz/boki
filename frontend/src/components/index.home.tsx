@@ -16,7 +16,7 @@ const HomeComponent = () => {
     <VStack spacing="150px">
       <MainPage />
       <SecondPage />
-      <TherdPage />
+      {/* <TherdPage /> */}
     </VStack>
   );
 };

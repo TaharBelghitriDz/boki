@@ -39,6 +39,7 @@ export default extendTheme({
   breakpoints: {
     start: "0px",
     sm: "320px",
+    os: "400px",
     md: "768px",
     lg: "960px",
     xl: "1300px",
