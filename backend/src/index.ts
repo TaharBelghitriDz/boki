@@ -8,6 +8,7 @@ import passport from "passport";
 import { googleStrategy } from "./controllers/auth";
 import { user } from "./models/user.model";
 import collection from "./routes/collections";
+import { search } from "./controllers/search";
 
 const app = express();
 app.use(express.json());
@@ -27,6 +28,7 @@ app.use(helmet());
 app.use(validateReq);
 app.use(authRout);
 app.use("/collection", collection);
+app.get("/search", search);
 passport.use(googleStrategy);
 
 export default app;
