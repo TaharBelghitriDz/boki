@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { validateEmail } from "utils/validation";
 import { FormController } from "./formcontroller";
 
 const Err = { msg: "", value: false } as const;
@@ -44,50 +45,69 @@ const LoginComponent = (props: StackProps) => {
 
   controllers.forEach((e) => {
     controllersList[e] = useState("");
-    console.log("update contollers list");
-    console.log(controllersList);
   });
 
   const loginFun = () => {
     const action = place ? "login" : "signup";
-    console.log(body);
 
     Object.keys(body).forEach((e: any) =>
       Object.keys(body[e]).forEach((es: any) => (body[e][es] = body[e][es][0]))
     );
-    console.log(body);
+
+    let newErro: any = {
+      email: Err,
+      password: Err,
+      confirmPassword: Err,
+    };
+
+    const email = body[action]["email"];
+    const password = body[action]["password"];
+
+    if (!email)
+      return setError((e: any) => ({
+        ...newErro,
+        email: { msg: "email can't be empty", value: true },
+      }));
+
+    if (!password)
+      return setError((e: any) => ({
+        ...newErro,
+        password: { msg: "password can't be empty", value: true },
+      }));
+
+    if (action === "signup" && !body.signup.confirmPassword)
+      return setError((e: any) => ({
+        ...newErro,
+        confirmPassword: { msg: "password can't be empty", value: true },
+      }));
+
+    if (!validateEmail(body[action]["email"]))
+      return setError((e: any) => ({
+        ...newErro,
+        email: { msg: "unvalid email", value: true },
+      }));
 
     fetch("http://localhost:8080/" + action, {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
       },
-      body: JSON.stringify(body[place ? "login" : "signup"]),
+      body: JSON.stringify(body[action]),
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        if (res.token) return router.push("/main");
 
-        if (res.err)
+        if (res.err) {
           if (res.err.split(".")[1]) {
             const errPlace = res.err.split(".")[0];
             const errMessage = res.err.split(".")[1];
 
             let newErrorValue: any = { msg: errMessage, value: true };
 
-            let newErro: any = {
-              email: Err,
-              password: Err,
-              confirmPassword: Err,
-            };
             newErro[errPlace] = newErrorValue;
 
-            console.log("newErro");
-            console.log(newErro);
-
             setError((e: any) => ({ ...newErro }));
-            console.log("isError login");
-            console.log(isError);
 
             toast({
               title: errMessage,
@@ -100,13 +120,12 @@ const LoginComponent = (props: StackProps) => {
               status: "error",
               isClosable: true,
             });
+        } else console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  console.log("login isError");
-  console.log(isError);
 
   return (
     <VStack {...props}>
