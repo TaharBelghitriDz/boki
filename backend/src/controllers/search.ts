@@ -3,10 +3,10 @@ import axios from "axios";
 import random from "random-words";
 
 export const search: Handler = (req, res) => {
-  const { query } = req.body;
+  const { query } = req.query;
 
   const data = {
-    q: query || random(1)[0],
+    q: (query as string | undefined) || random(1)[0],
     filter: "free-ebooks",
     maxResults: "10",
     printType: "books",
