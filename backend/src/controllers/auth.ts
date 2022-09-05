@@ -27,9 +27,9 @@ export const login: Handler = (req, res) => {
 };
 
 export const signup: Handler = (req, res) => {
-  const { email, password, confirmPassowrd } = req.body;
+  const { email, password, confirmPassword } = req.body;
 
-  if (password !== confirmPassowrd)
+  if (password !== confirmPassword)
     return res.status(400).json({ err: "password.check your password" });
 
   user
