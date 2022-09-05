@@ -28,7 +28,6 @@ app.use(helmet());
 app.use(validateReq);
 app.use(authRout);
 app.use("/collection", collection);
-app.get("/search", search);
 passport.use(googleStrategy);
 
 export default app;
