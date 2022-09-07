@@ -1,34 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# boki
 
-## Getting Started
+by [tahar belghitri](https://dz.linkedin.com/in/tahar-belghitri-3a182a199)
 
-First, run the development server:
+a simple nextjs express typescript book website based on [google book api](https://developers.google.com/books/docs/v1/using)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### [Demo](http) , [source code](https://github.com/TaharBelghitriDz/boki)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+be fre to clone & fork and contribute any time
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## ![icon](https://github.githubassets.com/images/icons/emoji/unicode/1f680.png)Quick start
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+**1. clone the repo**
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+**2. install all dependencies** `npm install` on both folders (**/backend** & **./frontend**)
 
-## Learn More
+**3. start the project** `npm run dev ` on
 
-To learn more about Next.js, take a look at the following resources:
+- **/backend** to start the server side
+- **./frontend** to start the nextjs app
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+local server gonna use port 8080 but you need create `.env` file containe all this variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- #PORT#
+- #CLIENT_ID# [google client id](https://console.cloud.google.com/apis/dashboard)
+- #SCLIENT_SECRET_ID# [google secret key](https://console.cloud.google.com/apis/dashboard)
+- #SECRET# session secret key
+- #MONGODB_URL#
+- #GOOGLE_KEY#
 
-## Deploy on Vercel
+## ![star](https://github.githubassets.com/images/icons/emoji/unicode/2b50.png) Project assistance
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+If you want to say **thank you** or/and support **_me_**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Add a [GitHub Star](https://github.com/yesoreyeram/grafana-infinity-datasource) to the project.
+- Tweet about project [on your Twitter](https://twitter.com/intent/tweet?text=Checkout%20this%20cool%20%23grafana%20datasource%20%40grafanainfinity.%20%0A%0ALiterally,%20get%20your%20data%20from%20anywhere%20into%20%23grafana.%20JSON,%20CSV,%20XML,%20GraphQL,%20OAuth2,%20RSS%20feed,%20%23kubernetes,%20%23azure,%20%23aws,%20%23gcp%20and%20more%20stuff.%0A%0Ahttps%3A//yesoreyeram.github.io/grafana-infinity-datasource%0A).
+- Write articles about project on [Dev.to](https://dev.to/), [Medium](https://medium.com/) or personal blog.
