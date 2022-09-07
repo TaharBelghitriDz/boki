@@ -11,6 +11,6 @@ const router = Router();
 router.use(validateToken);
 router.post("/create", createCollection);
 router.post("/action", collectinActions);
-router.post("/get", collectionGet);
+router.get("/get*", collectionGet);
 
 export default router;

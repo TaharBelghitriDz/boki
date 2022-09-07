@@ -10,8 +10,6 @@ export const createCollection: Handler = (req, res) => {
   user
     .findOne({ $and: [{ "collections.name": name }, { _id: userInfos._id }] })
     .then((user) => {
-      if (user) return res.status(400).json({ err: "name already used" });
-
       userInfos.collections.push({ name });
       userInfos
         .save()
@@ -38,6 +36,8 @@ export const collectinActions: Handler = (req, res) => {
 
   const userInfos = (req as any).user as userSchema;
 
+  console.log({ collectionName, bookName, img, action });
+
   const searchQuery = () => {
     if (
       (action === "create" && collectionName) ||
@@ -46,20 +46,23 @@ export const collectinActions: Handler = (req, res) => {
       if (action == "remove" && bookName)
         return { "collections.books.title": bookName };
       if (action == "remove" && !bookName)
-        return { "collections.name": collectionName };
-      else if (bookName) return { "collections.name": collectionName };
+        return [{ _id: userInfos._id }, { "collections.name": collectionName }];
+      else if (bookName)
+        return [{ _id: userInfos._id }, { "collections.name": collectionName }];
 
-      return {};
+      return [{ _id: userInfos._id }];
     } else return;
   };
+
+  console.log(searchQuery());
 
   if (!searchQuery())
     return res.status(400).json({ err: "something wrong happend #1" });
 
   user
     .findOne({
-      $and: [{ _id: userInfos._id }, { ...searchQuery() }],
-    })
+      $and: searchQuery(),
+    } as any)
     .then((user: any) => {
       if (!user)
         return res.status(400).json({ err: "something wrong happend #3" });
@@ -84,6 +87,8 @@ export const collectinActions: Handler = (req, res) => {
             return (e.books = e.books.filter((i: any) => i.title != bookName));
         });
 
+      console.log(user.collections);
+
       user
         .save()
         .then(() => res.status(200).json({ result: action }))
@@ -100,7 +105,7 @@ export const collectinActions: Handler = (req, res) => {
 };
 
 export const collectionGet: Handler = (req, res) => {
-  const { collectionName } = req.body;
+  const { collectionName } = req.params;
 
   const query = collectionName ? { "collections.name": collectionName } : {};
 

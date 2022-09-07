@@ -5,6 +5,11 @@ import {
   Highlight,
   HStack,
   Image,
+  Link,
+  Modal,
+  ModalOverlay,
+  Popover,
+  PopoverTrigger,
   Stack,
   Text,
   useDisclosure,
@@ -13,7 +18,9 @@ import {
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import useFetch from "utils/fetch";
 import BookDetails from "./book.details";
+import { SaveModal } from "./save.modal";
 
 const SingleLayout = ({
   name,
@@ -22,6 +29,7 @@ const SingleLayout = ({
   name: string;
   gradiunt: string;
 }) => {
+  const router = useRouter();
   const [random, setRandom] = useState("-");
 
   useEffect(() => {
@@ -46,6 +54,7 @@ const SingleLayout = ({
       color="white"
       cursor="pointer"
       flex="0 0 auto"
+      onClick={() => router.push("/collection?name=" + name)}
     >
       <Text fontSize={{ start: "25px", os: "30px" }} fontWeight="bold">
         {name}
@@ -165,7 +174,12 @@ export const MainHeaderText = (props: ChakraProps) => {
   );
 };
 
-export const SaveBook = (props: ChakraProps) => {
+export const SaveBook = (props: {
+  download?: string;
+  title: string;
+  img: string;
+}) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Stack
       display="flex"
@@ -193,7 +207,9 @@ export const SaveBook = (props: ChakraProps) => {
         cursor="pointer"
       >
         <Image src="/download-icon.svg" />
-        <Text>download</Text>
+        <Link href={props.download} _hover={{}} isExternal>
+          dowload
+        </Link>
       </HStack>
       <Divider color="transparent" w={{ start: "0", md: "10px" }} />
       <HStack
@@ -209,15 +225,31 @@ export const SaveBook = (props: ChakraProps) => {
         fontWeight="bold"
         rounded="5px"
         cursor="pointer"
+        onClick={isOpen ? onClose : onOpen}
       >
         <Image src="/save-icon.svg" />
         <Text>save</Text>
       </HStack>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <SaveModal
+          {...{ img: props.img, title: props.title, onClose: onClose }}
+        />
+      </Modal>
     </Stack>
   );
 };
 
-export const BookComponent = (props: ChakraProps) => {
+export const BookComponent = (
+  props: ChakraProps & {
+    title: string;
+    author: string;
+    img: string;
+    download: string;
+    subtitle: string;
+  }
+) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -227,18 +259,16 @@ export const BookComponent = (props: ChakraProps) => {
       h="auto"
       w={{ start: "full", os: "45%", md: "45%", lg: "430px" }}
       p="10px"
-      bg="green"
       flexDir={{ start: "column", lg: "row" }}
       mb="30px"
       rounded="10px"
-      backgroundImage="url('/bookcover.jpg')"
+      backgroundImage={"url('" + props.img + "')"}
       fontWeight="bold"
       whileHover={{ backgroundColor: "#000000", backgroundImage: "" }}
       pos="relative"
-      onClick={onOpen}
       justifyContent="space-between"
     >
-      <BookDetails isOpen={isOpen} onClose={onClose} />
+      <BookDetails isOpen={isOpen} onClose={onClose} {...props} />
       <Box
         left="0"
         top="0"
@@ -248,12 +278,15 @@ export const BookComponent = (props: ChakraProps) => {
         backdropFilter="blur(20px)"
         pos="absolute"
         rounded="10px"
+        onClick={onOpen}
       />
       <Image
-        src="/bookcover.jpg"
+        src={props.img}
         w={{ start: "full", md: "full", lg: "150px" }}
+        maxH={{ start: "300px" }}
         rounded="5px"
         zIndex={2}
+        onClick={onOpen}
       />
       <Divider color="transparent" h="30px" />
       <VStack
@@ -273,20 +306,24 @@ export const BookComponent = (props: ChakraProps) => {
           rounded="5px"
           w={{ start: "full", lg: "230px" }}
         >
-          <Text>some book name</Text>
-          <Text color="#D9D9D9">some author name</Text>
+          <Text onClick={onOpen}>{props.title}</Text>
+          <Text color="#D9D9D9" onClick={onOpen}>
+            {props.author}
+          </Text>
           <HStack spacing="10px" alignItems="initial">
             <Image src="/start-icon.svg" h="20px" />
             <Text>5.3</Text>
           </HStack>
         </VStack>
-        <SaveBook />
+        <SaveBook {...props} />
       </VStack>
     </Stack>
   );
 };
 
-export const BooksList = () => {
+export const BooksList = (props: { title?: string }) => {
+  const fetch = useFetch(props.title);
+
   return (
     <Box
       maxW="1000px"
@@ -297,12 +334,18 @@ export const BooksList = () => {
       flexDir="row"
       justifyContent="space-between"
     >
-      <BookComponent />
-
-      <BookComponent />
-
-      <BookComponent display={{ start: "none", md: "flex" }} />
-      <BookComponent display={{ start: "none", md: "flex" }} />
+      {fetch &&
+        fetch
+          .slice(0, 4)
+          .map((e: any, i: number) => (
+            <BookComponent
+              key={i}
+              {...e}
+              display={
+                i > 1 ? { start: "none", md: "flex" } : { start: "flex" }
+              }
+            />
+          ))}
     </Box>
   );
 };

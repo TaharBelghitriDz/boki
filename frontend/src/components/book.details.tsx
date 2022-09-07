@@ -1,5 +1,6 @@
 import {
   Box,
+  CloseButton,
   Image,
   Modal,
   ModalBody,
@@ -12,15 +13,20 @@ import { BooksList, SaveBook } from "./mini.components";
 const BookDetails = ({
   isOpen,
   onClose,
+  ...props
 }: {
   isOpen: boolean;
   onClose: () => void;
+  title: string;
+  img: string;
+  subtitle: string;
+  author: string;
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="full" motionPreset="scale">
       <ModalContent>
         <ModalBody
-          bgImg="url('/bookcover.jpg')"
+          bgImg={"url('" + props.img + "')"}
           bgPosition="center"
           bgSize="cover"
           pos="relative"
@@ -38,7 +44,7 @@ const BookDetails = ({
           />
           <VStack color="white" h="auto" alignItems="center">
             <VStack maxW="1000px" w="full" spacing="50px">
-              <Image src="/bookcover.jpg" h="80%" maxH="400px" rounded="10px" />
+              <Image src={props.img} h="80vw" maxH="400px" rounded="10px" />
               <Text
                 fontSize="30px"
                 fontWeight="bold"
@@ -46,37 +52,41 @@ const BookDetails = ({
                 textAlign="center"
                 lineHeight="30px"
               >
-                some book name
+                {props.title}
               </Text>
 
-              <SaveBook />
+              <SaveBook {...props} />
 
               <VStack alignItems="start" spacing="30px" maxW="600px">
-                <Box
+                <CloseButton
                   pos="fixed"
                   top="10px"
-                  ml="-30px"
-                  h="30px"
-                  w="30px"
-                  bg="green"
-                  rounded="full"
+                  right="30px"
+                  h="40px"
+                  w="40px"
+                  bg="black"
+                  rounded="10px"
                   cursor="pointer"
                   onClick={onClose}
+                  zIndex={10}
                 />
+
                 <Text>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                  {props.subtitle
+                    ? props.subtitle.split(" ").slice(0, 50).join(" ")
+                    : `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
                   vulputate libero et velit interdum, ac aliquet odio mattis.
                   Class aptent taciti sociosqu ad litora torquent per conubia
                   nostra, per inceptos himenaeos.Lorem ipsum dolor sit amet,
                   consectetur adipiscing elit. Nunc vulputate libero et velit
                   interdum, ac aliquet odio mattis. Class aptent taciti sociosqu
-                  ad litora torquent per conubia nostra, per inceptos himenaeos.
+                  ad litora torquent per conubia nostra, per inceptos himenaeos.`}
                 </Text>
                 <Text fontSize="25px" fontWeight="bold">
                   author details :
                 </Text>
                 <Text color="yellow" fontWeight="bold">
-                  some author name
+                  {props.author || "some author name"}
                 </Text>
                 <Text>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc

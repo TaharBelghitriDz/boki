@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   ChakraProps,
   CloseButton,
@@ -12,7 +11,6 @@ import {
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
-  PopoverHeader,
   PopoverTrigger,
   Stack,
   Text,
@@ -31,7 +29,7 @@ const Navbar = (props?: ChakraProps) => {
   const { isOpen, onToggle } = useDisclosure();
   const searchModal = useDisclosure();
   const userDetailsMobile = useDisclosure();
-  const [isUser, setIsUser] = useState(false);
+  const [isUser, setIsUser] = useState<boolean>();
 
   const handleScroll = () => {
     const position = window.pageYOffset;
@@ -45,12 +43,16 @@ const Navbar = (props?: ChakraProps) => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("token")) setIsUser(true);
+    if (localStorage.getItem("token")) setIsUser(() => true);
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) setIsUser(() => true);
+  }, [router]);
 
   useEffect(() => {
     if (isOpen) setOnTop(true);
@@ -82,7 +84,12 @@ const Navbar = (props?: ChakraProps) => {
         spacing="0px"
       >
         <HStack w="full" justifyContent="space-between">
-          <Box fontSize="40px" fontWeight="light">
+          <Box
+            fontSize="40px"
+            fontWeight="light"
+            cursor="pointer"
+            onClick={() => router.push("/")}
+          >
             boki
           </Box>
           <SearchModal {...searchModal} />
@@ -181,7 +188,15 @@ const Navbar = (props?: ChakraProps) => {
                     >
                       <Text cursor="pointer">saved</Text>
                       <Divider color="gray" w="20%" />
-                      <Text cursor="pointer">signout</Text>
+                      <Text
+                        cursor="pointer"
+                        onClick={() => {
+                          localStorage.removeItem("token");
+                          router.push("/login");
+                        }}
+                      >
+                        signout
+                      </Text>
                       <Divider color="gray" w="20%" />
                       <Text cursor="pointer">other details</Text>
                       <Divider color="gray" w="20%" />
@@ -247,7 +262,15 @@ const Navbar = (props?: ChakraProps) => {
                 >
                   <Text cursor="pointer">saved</Text>
                   <Divider color="gray" w="20%" />
-                  <Text cursor="pointer">signout</Text>
+                  <Text
+                    cursor="pointer"
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      router.push("/login");
+                    }}
+                  >
+                    signout
+                  </Text>
                   <Divider color="gray" w="20%" />
                   <Text cursor="pointer">other details</Text>
                   <Divider color="gray" w="20%" />

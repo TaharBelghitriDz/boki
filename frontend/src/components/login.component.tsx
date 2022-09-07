@@ -96,7 +96,8 @@ const LoginComponent = (props: StackProps) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.token) return router.push("/main");
+        if (res.token)
+          return localStorage.setItem("token", res.token), router.push("/main");
 
         if (res.err) {
           if (res.err.split(".")[1]) {

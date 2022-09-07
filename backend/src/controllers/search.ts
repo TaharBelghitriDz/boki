@@ -6,11 +6,12 @@ export const search: Handler = (req, res) => {
   const { query } = req.query;
 
   const data = {
-    q: (query as string | undefined) || random(1)[0],
-    filter: "free-ebooks",
+    q: (query as string | undefined) || random(1)[0] + "+intitle",
+    filter: "paid-ebooks",
     maxResults: "10",
     printType: "books",
     key: process.env.GOOGLE_KEY as string,
+    orderBy: "newest",
   };
 
   const searchUrl = new URLSearchParams(data);

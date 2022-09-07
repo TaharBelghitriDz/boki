@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   HStack,
   Image,
@@ -8,11 +7,13 @@ import {
   ModalContent,
   ModalFooter,
   ModalOverlay,
+  Spinner,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { filterResult } from "utils/filter";
+import { fetchFun } from "utils/fetch";
 
 const BookResult = ({ img, title }: { img: string; title: string }) => {
   return (
@@ -31,25 +32,23 @@ const SearchModal = ({
   onClose: () => void;
 }) => {
   const [input, setInput] = useState("");
-  const [comp, setComp] = useState<JSX.Element>();
+  const [comp, setComp] = useState<JSX.Element[]>();
 
   const searchFun = () => {
-    fetch("http://localhost:8080/search/" + input)
-      .then((res) => res.json())
+    fetchFun(input)
       .then((res) => {
-        console.log(res.data);
-
-        setComp(
+        setComp(() =>
           filterResult(res).map((e: any, i: number) => (
             <BookResult {...e} key={i} />
           ))
         );
       })
-      .catch((err) => setComp(undefined));
+      .catch(() => setComp(undefined));
   };
 
   useEffect(() => {
     const search = setTimeout(() => searchFun(), 500);
+    setComp(undefined);
     return () => clearTimeout(search);
   }, [input]);
 
@@ -66,6 +65,7 @@ const SearchModal = ({
             borderColor="green"
             size="md"
             fontSize="l"
+            placeholder="search"
           />
           <VStack
             py="30px"
@@ -78,7 +78,7 @@ const SearchModal = ({
             overflow="hidden"
             overflowY="scroll"
           >
-            {comp || <Box>loading...</Box>}
+            {comp || <Spinner />}
           </VStack>
         </VStack>
         <ModalFooter>

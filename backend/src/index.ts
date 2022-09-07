@@ -28,6 +28,11 @@ app.use(helmet());
 app.use(validateReq);
 app.use(authRout);
 app.use("/collection", collection);
+app.get("/search/*", search);
 passport.use(googleStrategy);
+
+user.findOne({ "collections.name": "fff" }, (e: any, r: any) => {
+  console.log(r);
+});
 
 export default app;
