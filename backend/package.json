@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node" : "18.7.0"
+    "node" : "16.x"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.ts",
-    "start": "node index.ts"
+    "start": "vercel dev",
+    "deploy" : "vercel deploy --prod"
+
   },
   "keywords": [],
   "author": "",
