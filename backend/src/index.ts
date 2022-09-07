@@ -24,7 +24,7 @@ app.use(
 
 app.use(cors());
 app.use(helmet());
-
+app.get("/", (_, res) => res.send("hi"));
 app.use(validateReq);
 app.use(authRout);
 app.use("/collection", collection);
