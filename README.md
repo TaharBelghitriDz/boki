@@ -1,3 +1,9 @@
+---
+title: "Very cool page"
+subtitle: "You're going to love this."
+permalink: /cool
+---
+
 # boki
 
 by [tahar belghitri](https://dz.linkedin.com/in/tahar-belghitri-3a182a199)
