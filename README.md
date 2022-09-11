@@ -6,6 +6,16 @@ a simple nextjs express typescript book website based on [google book api](https
 
 ### [Demo](http) , [source code](https://github.com/TaharBelghitriDz/boki)
 
+# screenshots from the demo
+
+![](https://i.postimg.cc/V6DyF2jz/Screenshot-from-2022-09-11-14-14-30.png)
+![](https://i.postimg.cc/JhFY4mcD/Screenshot-from-2022-09-11-14-14-10.png)
+![](https://i.postimg.cc/SQcjV3ch/Screenshot-from-2022-09-11-14-13-55.png)
+![](https://i.postimg.cc/XJcN62dP/Screenshot-from-2022-09-11-14-15-57.png)
+![](https://i.postimg.cc/VLrmsHWh/Screenshot-from-2022-09-11-14-15-37.png)
+
+#
+
 be fre to clone & fork and contribute any time
 
 ## ![icon](https://github.githubassets.com/images/icons/emoji/unicode/1f680.png)Quick start
