@@ -14,6 +14,6 @@ const useFetch = (str: string | undefined = "art") => {
 };
 
 export const fetchFun = (str: string | undefined = "art") =>
-  fetch("http://localhost:8080/search/" + str).then((res) => res.json());
+  fetch("https://boki-six.vercel.app/search/" + str).then((res) => res.json());
 
 export default useFetch;

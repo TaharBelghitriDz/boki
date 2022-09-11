@@ -16,6 +16,7 @@ import { useEffect, useRef, useState } from "react";
 export const SaveModal = (props: {
   title: string;
   img: string;
+  id: string;
   onClose: () => void;
 }) => {
   const [col, setCol] = useState<Record<string, any>>();
@@ -34,7 +35,7 @@ export const SaveModal = (props: {
   });
 
   const fetchFun = (str: string, body: Record<string, any>) =>
-    fetch("http://localhost:8080/collection/" + str, {
+    fetch("https://boki-six.vercel.app/collection/" + str, {
       method: "POST",
       headers: {
         token: localStorage.getItem("token"),
@@ -78,6 +79,7 @@ export const SaveModal = (props: {
       collectionName: value,
       bookName: props.title,
       img: props.img,
+      id: props.id,
     }).then((res) => {
       setLoading(false);
 
@@ -98,7 +100,7 @@ export const SaveModal = (props: {
   };
 
   useEffect(() => {
-    fetch("http://localhost:8080/collection/get", {
+    fetch("https://boki-six.vercel.app/collection/get", {
       headers: { token: localStorage.getItem("token") },
     } as any)
       .then((res) => res.json())
@@ -106,13 +108,11 @@ export const SaveModal = (props: {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(col);
-
   if (!localStorage.getItem("token"))
     return (
       <ModalContent p="30px" rounded="15px">
         <VStack>
-          <Text textAlign="center">use your acount ot save the books</Text>
+          <Text textAlign="center">use your acount to save the books</Text>
           <Link href="/login" color="blue">
             login & signup now
           </Link>
@@ -126,7 +126,7 @@ export const SaveModal = (props: {
         <Spinner />
       ) : (
         <VStack spacing="20px" color="black" ref={ref}>
-          {!newCol ? (
+          {!newCol && col.result && col.result.length > 0 ? (
             <Select
               value={value}
               onChange={({ target: { value } }) => setValue(value)}
@@ -135,7 +135,6 @@ export const SaveModal = (props: {
               autoFocus
               bg="#F0F0F0"
             >
-              <option>favorit</option>
               {col.result.map((e: any, i: number) => (
                 <option key={i} style={{ margin: "20px" }}>
                   {e.name}

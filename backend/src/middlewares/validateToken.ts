@@ -4,7 +4,6 @@ import { user } from "../models/user.model";
 
 export const validateToken: Handler = (req, res, next) => {
   // this need to fix to
-  console.log(req.body);
 
   const { str }: any = tokenVrfy(req.headers.token as string);
 
@@ -15,6 +14,8 @@ export const validateToken: Handler = (req, res, next) => {
       return res.status(400).json({ err: "something wrong happend" });
 
     (req as any).user = user;
+    console.log("req.body.token");
+    console.log(req.body);
 
     next();
   });

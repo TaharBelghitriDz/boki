@@ -87,7 +87,7 @@ const LoginComponent = (props: StackProps) => {
         email: { msg: "unvalid email", value: true },
       }));
 
-    fetch("http://localhost:8080/" + action, {
+    fetch("https://boki-six.vercel.app/" + action, {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -142,7 +142,7 @@ const LoginComponent = (props: StackProps) => {
         w="full"
         rounded="10px"
         fontSize="m"
-        onClick={() => router.push("http://localhost:8080/auth/google")}
+        onClick={() => router.push("https://boki-six.vercel.app/auth/google")}
         zIndex={0}
       >
         <Image src="/Googleicon.svg" h="25px" w="auto" />

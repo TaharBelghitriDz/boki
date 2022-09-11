@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.2.9",
@@ -16,7 +15,7 @@
     "@types/extract-colors": "^1.1.0",
     "@types/get-image-colors": "^4.0.1",
     "extract-colors": "^1.1.22",
-    "framer-motion": "^7.2.1",
+    "framer-motion": "^7.3.2",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0"

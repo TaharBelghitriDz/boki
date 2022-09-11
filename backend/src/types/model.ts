@@ -6,7 +6,7 @@ export type userSchema = Document & {
   password: string;
   collections: {
     name: string;
-    books?: { title: string; img: string }[];
+    books?: { title: string; img: string; id: string }[];
   }[];
 };
 

@@ -17,6 +17,7 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
+import SavedBooksModal from "components/savedBooksModal";
 import SearchModal from "components/search.modal";
 import { motion, TargetAndTransition } from "framer-motion";
 import { useRouter } from "next/router";
@@ -30,6 +31,7 @@ const Navbar = (props?: ChakraProps) => {
   const searchModal = useDisclosure();
   const userDetailsMobile = useDisclosure();
   const [isUser, setIsUser] = useState<boolean>();
+  const SavedBooksModallDisclosure = useDisclosure();
 
   const handleScroll = () => {
     const position = window.pageYOffset;
@@ -186,7 +188,13 @@ const Navbar = (props?: ChakraProps) => {
                       py="20px"
                       spacing="15px"
                     >
-                      <Text cursor="pointer">saved</Text>
+                      <Text
+                        cursor="pointer"
+                        onClick={SavedBooksModallDisclosure.onToggle}
+                      >
+                        saved
+                      </Text>
+                      <SavedBooksModal {...SavedBooksModallDisclosure} />
                       <Divider color="gray" w="20%" />
                       <Text
                         cursor="pointer"
@@ -260,7 +268,12 @@ const Navbar = (props?: ChakraProps) => {
                   py="20px"
                   spacing="15px"
                 >
-                  <Text cursor="pointer">saved</Text>
+                  <Text
+                    cursor="pointer"
+                    onClick={SavedBooksModallDisclosure.onToggle}
+                  >
+                    saved
+                  </Text>
                   <Divider color="gray" w="20%" />
                   <Text
                     cursor="pointer"

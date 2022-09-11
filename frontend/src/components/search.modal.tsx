@@ -10,16 +10,37 @@ import {
   Spinner,
   Text,
   VStack,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { filterResult } from "utils/filter";
 import { fetchFun } from "utils/fetch";
+import BookDetails from "./book.details";
 
-const BookResult = ({ img, title }: { img: string; title: string }) => {
+const BookResult = (props: { img: string; title: string; id: string }) => {
+  const BookDetailView = useDisclosure();
+
   return (
-    <HStack alignItems="start" justifyContent="start" w="full">
-      <Image src={img} h="100px" />
-      <Text lineHeight="20px">{title}</Text>
+    <HStack
+      alignItems="start"
+      justifyContent="start"
+      w="full"
+      onClick={BookDetailView.onToggle}
+    >
+      <BookDetails
+        {...(props as {
+          isOpen: boolean;
+          onClose: () => void;
+          title: string;
+          img: string;
+          subtitle: string;
+          author: string;
+          id: string;
+        })}
+        {...BookDetailView}
+      />
+      <Image src={props.img} h="100px" />
+      <Text lineHeight="20px">{props.title}</Text>
     </HStack>
   );
 };

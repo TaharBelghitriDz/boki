@@ -178,6 +178,7 @@ export const SaveBook = (props: {
   download?: string;
   title: string;
   img: string;
+  id: string;
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -234,7 +235,12 @@ export const SaveBook = (props: {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <SaveModal
-          {...{ img: props.img, title: props.title, onClose: onClose }}
+          {...{
+            img: props.img,
+            title: props.title,
+            onClose: onClose,
+            id: props.id,
+          }}
         />
       </Modal>
     </Stack>
@@ -248,6 +254,7 @@ export const BookComponent = (
     img: string;
     download: string;
     subtitle: string;
+    id: string;
   }
 ) => {
   const { isOpen, onOpen, onClose } = useDisclosure();

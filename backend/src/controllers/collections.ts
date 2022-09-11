@@ -32,11 +32,9 @@ export const collectinActions: Handler = (req, res) => {
   // it's working fine for simple idea like mine (no one gonna try to hack it ... it's open source already)
   //
 
-  const { collectionName, bookName, img, action } = req.body;
+  const { collectionName, bookName, img, action, id } = req.body;
 
   const userInfos = (req as any).user as userSchema;
-
-  console.log({ collectionName, bookName, img, action });
 
   const searchQuery = () => {
     if (
@@ -73,7 +71,11 @@ export const collectinActions: Handler = (req, res) => {
       if (action === "create" && bookName && img)
         user.collections.map((e: any) => {
           if (e.name === collectionName)
-            return e.books.push({ title: bookName, img });
+            return e.books.push({
+              id,
+              title: bookName,
+              img,
+            });
         });
 
       if (action === "remove" && !bookName)
@@ -86,8 +88,6 @@ export const collectinActions: Handler = (req, res) => {
           if (e.name === collectionName)
             return (e.books = e.books.filter((i: any) => i.title != bookName));
         });
-
-      console.log(user.collections);
 
       user
         .save()
@@ -120,7 +120,7 @@ export const collectionGet: Handler = (req, res) => {
           ? user.collections.filter((e) => e.name == collectionName)
           : user.collections.map((e: any) => ({
               name: e.name,
-              img: e.books[0] ? e.books[0].img : undefined,
+              book: e.books,
             })),
       });
     })

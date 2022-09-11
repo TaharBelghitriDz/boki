@@ -54,7 +54,7 @@ const MainPage = () => {
         spacing="20px"
         p="20px"
         rounded="10px"
-        onClick={() => router.push("http://localhost:3000/main")}
+        onClick={() => router.push("/main")}
       >
         <SearchIcon size={25} />
         <Text color="white">Find your next book now</Text>

@@ -7,7 +7,7 @@ export const search: Handler = (req, res) => {
 
   const data = {
     q: (query as string | undefined) || random(1)[0] + "+intitle",
-    filter: "paid-ebooks",
+    filter: "free-ebooks",
     maxResults: "10",
     printType: "books",
     key: process.env.GOOGLE_KEY as string,
