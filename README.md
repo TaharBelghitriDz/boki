@@ -4,7 +4,7 @@ by [tahar belghitri](https://dz.linkedin.com/in/tahar-belghitri-3a182a199)
 
 a simple nextjs express typescript book website based on [google book api](https://developers.google.com/books/docs/v1/using)
 
-### [Demo](http) , [source code](https://github.com/TaharBelghitriDz/boki)
+### [Demo](https://booki-chi.vercel.app/) , [source code](https://github.com/TaharBelghitriDz/boki)
 
 # screenshots from the demo
 
