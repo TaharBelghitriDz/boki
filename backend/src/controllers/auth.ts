@@ -59,14 +59,15 @@ export const googleAuthMid: Handler = (req, res) => {
     .then((userFound) => {
       if (userFound)
         return res.redirect(
-          "http://localhost:3000/main?token=" + tokenSign(userFound._id)
+          "https://booki-chi.vercel.app/main?token=" + tokenSign(userFound._id)
         );
 
       new user({ name, email, password: Date.now().toString() })
         .save()
         .then((savedUser) =>
           res.redirect(
-            "http://localhost:3000/main?token=" + tokenSign(savedUser._id)
+            "https://booki-chi.vercel.app/main?token=" +
+              tokenSign(savedUser._id)
           )
         )
         .catch(() => res.status(400).json({ err: "something wrong happend" }));
@@ -78,7 +79,7 @@ export const googleStrategy = new GoogleStrategy(
   {
     clientID: process.env.CLIENT_ID as string,
     clientSecret: process.env.SCLIENT_SECRET_ID as string,
-    callbackURL: "http://localhost:8080/auth/google/callback",
+    callbackURL: "https://boki-six.vercel.app/auth/google/callback",
   },
   function (_, __, profile, done) {
     return done(null, profile);
